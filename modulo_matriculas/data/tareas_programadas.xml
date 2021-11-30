@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="validar_tiempo_matriculas" model="ir.cron">
+            <field name="state">code</field>
+            <field name="code">model.validarTiempoMatricula()</field>
+            <field name="interval_type">days</field>
+            <field name="name">Validación de Tiempo Matrícula</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">False</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="model_id" ref="modulo_matriculas.model_ma_matricula"/>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="validar_tiempo_matriculas_inicio" model="ir.cron">
+            <field name="state">code</field>
+            <field name="code">model.validarInicioMatricula()</field>
+            <field name="interval_type">days</field>
+            <field name="name">Validación de Inicio Periodo Matrícula</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">False</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="model_id" ref="modulo_matriculas.model_ma_periodomatricula"/>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="recordatorio_decano" model="ir.cron">
+            <field name="state">code</field>
+            <field name="code">model.recordarDecano()</field>
+            <field name="interval_type">days</field>
+            <field name="name">Recordatorio para aprobar solicitud de matrícula Decano</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">False</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="model_id" ref="modulo_matriculas.model_ma_prerrequisito"/>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="recordatorio_secretaria" model="ir.cron">
+            <field name="state">code</field>
+            <field name="code">model.recordarSecretaria()</field>
+            <field name="interval_type">days</field>
+            <field name="name">Recordatorio para solicitud calculo de valores pendientes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">False</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="model_id" ref="modulo_matriculas.model_ma_prerrequisito"/>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="recordatorio_secretaria_comprobante" model="ir.cron">
+            <field name="state">code</field>
+            <field name="code">model.recordarSecretariaComprobante()</field>
+            <field name="interval_type">days</field>
+            <field name="name">Recordatorio para comprobante de Pago</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">False</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="model_id" ref="modulo_matriculas.model_ma_prerrequisito"/>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <record id="recordatorio_gestor_matricula" model="ir.cron">
+            <field name="state">code</field>
+            <field name="code">model.recordarGestorMatricula()</field>
+            <field name="interval_type">days</field>
+            <field name="name">Recordatorio para validar matrícula</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">False</field>
+            <field name="active">True</field>
+            <field name="interval_number">1</field>
+            <field name="model_id" ref="modulo_matriculas.model_ma_prerrequisito"/>
+        </record>
+    </data>
+</odoo>
+
