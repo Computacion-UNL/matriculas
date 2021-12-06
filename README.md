@@ -32,14 +32,14 @@ Las funcionalidades con las que cuenta el módulo de sofware son:
 * Comunicación y/o notificación de fases en las que se encuetra el trámite
 
 ## Guía de Usuario
-Para ingresar al módulo de software solicitar la dirección url al correo: direccion.cis@unl.edu.ec o su vez al autor.
-Para acceder a los manuales de instalación del módulo en conjunto con sus manuales de uso solicitar anexos correspondientes a direccion.cis@unl.edu.ec o al autor.
+<p align="justify">Para ingresar al módulo de software solicitar la dirección url al correo: direccion.cis@unl.edu.ec o su vez al autor.
+Para acceder a los manuales de instalación del módulo en conjunto con sus manuales de uso solicitar anexos correspondientes a direccion.cis@unl.edu.ec o al autor.</p>
 
 https://drive.google.com/drive/folders/1C1EKwSU_zkGii21HRIJeu1jtb9jfsbVu?usp=sharing
 
 ## Guía de Instalación
 
-Para comenzar con la instalación del módulo de software se recomienda acceder al siguiente enlace: https://drive.google.com/drive/folders/1FPpi4YOfvG3AegZmYZ7HEqZpALvnxPT_?usp=sharing el cual proporciona una guía referente a la implantación del módulo en el Sistema Odoo ERP.
+<p align="justify">Para comenzar con la instalación del módulo de software se recomienda acceder al siguiente enlace: https://drive.google.com/drive/folders/1FPpi4YOfvG3AegZmYZ7HEqZpALvnxPT_?usp=sharing el cual proporciona una guía referente a la implantación del módulo en el Sistema Odoo ERP.</p>
 
 Las Tecnologías y Herramientas utilizadas fueron:
 
