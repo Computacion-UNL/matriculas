@@ -20,7 +20,7 @@ Con la dirección del:
 
 
 ## Descripción y contexto
-<p align="center">El presente repositorio contiene la documentación y código fuente del proyecto de titulación denominado **MÓDULO PARA LA ASIGNACIÓN DE MATRÍCULA POR ASIGNATURA EN LA CARRERA DE INGENIERÍA EN SISTEMAS/COMPUTACIÓN** es una
+<p align="justify">El presente repositorio contiene la documentación y código fuente del proyecto de titulación denominado **MÓDULO PARA LA ASIGNACIÓN DE MATRÍCULA POR ASIGNATURA EN LA CARRERA DE INGENIERÍA EN SISTEMAS/COMPUTACIÓN** es una
 el cual es una propuesta de automatizar el proceso del mismo nombre utilizando la plataforma Odoo Community, y tiene como objetivo brindar a los involucrados una herramienta que les permita realizar las tareas que lo componen de manera rápida, ágil e intuitiva.</p>
 
 Las funcionalidades con las que cuenta el módulo de sofware son:
