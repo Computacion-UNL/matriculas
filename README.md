@@ -1,4 +1,6 @@
-# MÓDULO PARA LA ASIGNACIÓN DE MATRÍCULA POR ASIGNATURA EN LA CARRERA DE INGENIERÍA EN SISTEMAS/COMPUTACIÓN
+<h1 align="center">MÓDULO PARA LA ASIGNACIÓN DE MATRÍCULA POR ASIGNATURA EN LA CARRERA DE INGENIERÍA EN SISTEMAS/COMPUTACIÓN</h1>
+<p align="center">UNIVERSIDAD NACIONAL DE LOJA</p>
+<p align="center"><img src="https://pbs.twimg.com/profile_images/1225522326487347211/FaNm0ISf_400x400.jpg" width="200" height="200"/></p>
 
 ## TABLA DE CONTENIDOS
 1. [Autores](https://github.com/Computacion-UNL/matriculas/new/main?readme=1#autores)
