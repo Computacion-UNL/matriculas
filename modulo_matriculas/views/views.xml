@@ -1,9 +1,9 @@
 <odoo>
     <data>
 
-        <!--VISTAS ALUMNO-->
-        <!--VISTAS ALUMNO FORM-->
         <!--Vista Form Matricula Alumno-->
+
+
         <record id="view_form_matricula" model="ir.ui.view">
             <field name="name">view.form.ma.matricula</field>
             <field name="model">ma.matricula</field>
@@ -11,113 +11,86 @@
                 <form  create="false">
                     <sheet>
                             <group>
-                                <field name="user_id" invisible="1"/>
-                                <field name="periodo_id" />
-                                <field name="carrera_id" />
-                                <field name="tipo_matricula"/>
+                                <field name ="decano" groups="modulo_matriculas.res_groups_administrador"/>
+                                <field name ="name" placeholder="Ingrese su nombre"/>
+                                <field name ="cedula_alumno" placeholder="Ingrese su nro. de cédula"/>
+                                <field name ="periodo_id"/>
+                                <field name="carrera_id"/>
                             </group>
+                        <hr/>
+                        <notebook>
+                            <page string="Datos de Tercera Matrícula">
+
+                            <group>
+                                <field name ="ciclo_materias_reprobadas_tercera" domain="[('carrera_id', '=', carrera_id)]"/>
+                            </group>
+                                <br></br>
+
+                                <group>
+
+                                <field name="asignaturas_reprobadas_tercera" domain="[('ciclo_id', '=', ciclo_materias_reprobadas_tercera)]"/>
+                            </group>
+                            </page>
+                            <page string="Datos de Segunda Matrícula">
+
+
                             <group>
                                 <field name="ciclo_materias_reprobadas" domain="[('carrera_id', '=', carrera_id)]"/>
+                            </group>
+                                <br></br>
+                            <group>
                                 <field name="paralelo_ciclo_reprobar" domain="[('ciclo_id', '=', ciclo_materias_reprobadas)]"/>
+                            </group>
+                                <br></br>
+                            <group>
                                 <field name="asignaturas_reprobadas" domain="[('ciclo_id', '=', ciclo_materias_reprobadas)]"/>
                             </group>
+
+                            </page>
+                            <page string="Datos de Primera Matrícula">
+
                             <group>
-                            <field name="matricular_mismo_ciclo"/>
+                                <field name ="ciclo_materias_pendientes" domain="[('carrera_id', '=', carrera_id)]" />
+                            </group>
+                                <br></br>
+                            <group>
+                                <field name="asignaturas_pendientes" domain="[('ciclo_id', '=', ciclo_materias_pendientes)]"/>
+                            </group>
+                                <br></br>
+                            <group>
+                                <field name="validar_matricula_1_2" invisible="1"/>
+                            </group>
+                                <br></br>
+                            <group>
+                                <field name ="ciclo_matricular_especial" domain="[('carrera_id', '=', carrera_id)]"  attrs="{'invisible': [('validar_matricula_1_2', '=', False)]}"/>
+                            </group>
+                            </page>
+
+                        </notebook>
+                            <div class="d-flex justify-content-center">
+                                <button style="float: center;"
+                                    string="Simular Matrícula"
+                                    type="object"
+                                    name="botonmatricular"
+                                    class="btn btn-primary btn-lg oe_highlight"/>
+                            </div>
+                        <hr/>
+                        <br></br>
+
+                            <group>
+                                <field name="ciclo_matricular" readonly="1"/>
                             </group>
                             <group>
-                                <field name="ciclo_materias_matricular" domain="[('carrera_id', '=', carrera_id)]" attrs="{'invisible': ['|',('tipo_matricula', '=', 'tercera_matricula'),('matricular_mismo_ciclo', '=', True)]}"/>
-                                <field name="asignaturas_matricular" domain="[('ciclo_id', '=', ciclo_materias_matricular)]" attrs="{'invisible': ['|',('tipo_matricula', '=', 'tercera_matricula'),('matricular_mismo_ciclo', '=', True)]}"/>
+                                <field name="asignaturas_tercera" readonly="1"/>
                             </group>
-                        <notebook>
-                        </notebook>
+                            <group>
+                                <field name="asignaturas_segunda" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="asignaturas_primera" readonly="1"/>
+                            </group>
                     </sheet>
                 </form>
-            </field>
-        </record>
-
-        <!--Vista Form Prerrequisito Alumno-->
-        <record id="view_form_prerrequisito" model="ir.ui.view">
-            <field name="name">view.form.ma.prerrequisito</field>
-            <field name="model">ma.prerrequisito</field>
-            <field name="arch" type="xml">
-                <form  create="false">
-                    <sheet>
-                        <notebook>
-                            <page string="1. Solicitud Decano">
-                                <group>
-                                    <group>
-                                        <field name="documento_revisar_solicitud_decano"/>
-                                        <hr/>
-                                        <field name="aprobado_solicitud_decano" readonly="1"/>
-                                        <hr/>
-                                        <field name="documento_denegar_solicitud_decano" string="Justificación" readonly="1" attrs="{'invisible':[('aprobado_solicitud_decano', '!=', False)]}"/>
-                                        <field name="enviar_solicitud_decano" invisible="1"/>
-                                    </group>
-                                </group>
-
-                                <group>
-                                    <footer>
-                                        <button style="float: right;" name="enviar_decano" type="object" string="Notificar Solicitud" class="oe_highlight" attrs="{'invisible':[('enviar_solicitud_decano', '!=', False)]}"/>
-                                    </footer>
-                                </group>
-                            </page>
-
-                            <page string="2. Solicitud Cálculo de Valores" attrs="{'invisible':[('aprobado_solicitud_decano', '!=', True)]}">
-                                <group>
-                                    <group>
-                                        <field name="documento_revisar_asignacion_categoria"/>
-                                        <field name="documento_revisar_solicitud_calculo_valores"/>
-                                        <hr/>
-                                        <field name="aprobado_solicitud_calculo_valores" readonly="1"/>
-                                        <hr/>
-                                        <field name="documento_aprobado_solicitud_calculo_valores" string="Respuesta" readonly="1"/>
-                                        <field name="enviar_solicitud_calculo_valores" invisible="1"/>
-                                    </group>
-                                </group>
-
-                                <group>
-                                    <footer>
-                                        <button style="float: right;" name="enviar_secretaria" type="object" string="Notificar Solicitud" class="oe_highlight" attrs="{'invisible':[('enviar_solicitud_calculo_valores', '!=', False)]}"/>
-                                    </footer>
-                                </group>
-                            </page>
-
-                            <page string="3. Comprobante de Pago" attrs="{'invisible':[('aprobado_solicitud_calculo_valores', '!=', True)]}">
-                                <group>
-                                    <group>
-                                        <field name="documento_revisar_comprobante_pago"/>
-                                        <hr/>
-                                        <field name="aprobado_comprobante_pago" readonly="1"/>
-
-                                        <field name="razon_no_comprobante" readonly="1"/>
-
-                                        <field name="enviar_notificacion_comprobante" invisible="1"/>
-
-                                    </group>
-                                </group>
-
-                                <group>
-                                    <footer>
-                                        <button style="float: right;" name="enviar_comprobante" type="object" string="Notificar Comprobante" class="oe_highlight" attrs="{'invisible':[('enviar_notificacion_comprobante', '!=', False)]}"/>
-                                    </footer>
-                                </group>
-                            </page>
-                        </notebook>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <!--VISTAS ALUMNO TREE-->
-        <!--Vista Tree Prerrequisito Alumno-->
-        <record id="view_tree_prerrequisito" model="ir.ui.view">
-            <field name="name">view.tree.ma.prerrequisito</field>
-            <field name="model">ma.prerrequisito</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="user_id"/>
-                    <field name="fecha_inicio_proceso"/>
-                </tree>
             </field>
         </record>
 
@@ -155,70 +128,6 @@
             </field>
         </record>
 
-        <!--Vista Tree  Matricula Alumno-->
-        <record id="view_tree_matricula_alumno" model="ir.ui.view">
-            <field name="name">view.tree.ma.matricula</field>
-            <field name="model">ma.matricula</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="periodo_id"/>
-                    <field name="carrera_id"/>
-                    <field name="tipo_matricula"/>
-                    <field name="ciclo_materias_matricular"/>
-                    <button
-                            string="Matricularse"
-                            type="object"
-                            name="proceso_matricularse"
-                            class="btn btn-primary"/>
-                </tree>
-            </field>
-        </record>
-
-        <!--VISTAS DECANO-->
-        <!--VISTAS DECANO FORM-->
-        <!--Vista Form Prerrequisito Decano-->
-        <record id="view_form_prerrequisito_decano" model="ir.ui.view">
-            <field name="name">view.form.ma.prerrequisito.decano</field>
-            <field name="model">ma.prerrequisito</field>
-            <field name="arch" type="xml">
-                <form  create="false">
-                    <sheet>
-                        <notebook>
-                            <page string="1. Solicitud Decano">
-                                <group>
-                                    <group>
-                                        <field name="documento_revisar_solicitud_decano" readonly="1" string="Solicitud de matrícula adjunta por el estudiante"/>
-                                        <hr/>
-                                        <field name="aprobado_solicitud_decano" string="Aprobar solicitud presentada"/>
-                                        <hr/>
-                                        <field name="documento_denegar_solicitud_decano" string="Justificación" attrs="{'invisible':[('aprobado_solicitud_decano', '!=', False)]}"/>
-
-                                        <field name="enviar_solicitud_decano" invisible="1"/>
-                                    </group>
-                                </group>
-
-                                <group>
-                                </group>
-                            </page>
-
-                        </notebook>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-        <!--VISTAS DECANO TREE-->
-        <!--Vista Tree Prerrequisito Decano-->
-        <record id="view_tree_prerrequisito_decano" model="ir.ui.view">
-            <field name="name">view.tree.ma.prerrequisito</field>
-            <field name="model">ma.prerrequisito</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="user_id"/>
-                    <field name="fecha_inicio_proceso"/>
-                </tree>
-            </field>
-        </record>
-
         <!--VISTAS ADMINISTRADOR-->
         <!--VISTAS ADMINISTRADOR FORM-->
         <!--Vista Form Periodo Matrícula Gestor-->
@@ -232,7 +141,6 @@
                                 <field name="name"/>
                                 <field name="fecha_inicio"/>
                                 <field name="fecha_fin"/>
-                                <field name="estado" readonly="1"/>
                             </group>
                         <notebook>
                         </notebook>
@@ -437,24 +345,6 @@
             </field>
         </record>
 
-        <!--Vista Tree Prerrequisito Gestor-->
-        <record id="view_tree_prerrequisito_gestor" model="ir.ui.view">
-            <field name="name">view.tree.ma.prerrequisito.gestor</field>
-            <field name="model">ma.prerrequisito</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="user_id"/>
-                    <field name="matricula_aprobada"/>
-                    <field name="aprobado_comprobante_pago" invisible="1"/>
-                    <button
-                            attrs="{'invisible':['|',('matricula_aprobada', '!=', False),('aprobado_comprobante_pago', '!=', True)]}"
-                            string="Validar Matrícula"
-                            type="object"
-                            name="validarMatricula"
-                            class="btn btn-primary"/>
-                </tree>
-            </field>
-        </record>
 
         <!--Vista Tree Usuario Gestor-->
         <record id="view_tree_usuario" model="ir.ui.view">
@@ -470,60 +360,6 @@
             </field>
         </record>
 
-        <!--VISTAS SECRETARIA-->
-        <!--VISTAS SECRETARIA FORM-->
-        <!--Vista Form Prerrequisito Secretaria-->
-        <record id="view_form_prerrequisito_secretaria" model="ir.ui.view">
-            <field name="name">view.form.ma.prerrequisito.secretaria</field>
-            <field name="model">ma.prerrequisito</field>
-            <field name="arch" type="xml">
-                <form  create="false">
-                    <sheet>
-                        <notebook>
-                            <page string="1. Solicitud Cálculo de Valores">
-                                <group>
-                                    <group>
-                                        <field name="documento_revisar_asignacion_categoria" readonly="1"/>
-                                        <field name="documento_revisar_solicitud_calculo_valores" readonly="1"/>
-                                        <hr/>
-                                        <field name="aprobado_solicitud_calculo_valores" string="¿Aprobar solicitud de cálculo de valores?"/>
-                                        <hr/>
-                                        <field name="documento_aprobado_solicitud_calculo_valores" string="Respuesta"/>
-
-                                    </group>
-                                </group>
-                            </page>
-
-                            <page string="2. Comprobante de Pago" attrs="{'invisible':[('aprobado_solicitud_calculo_valores', '!=', True)]}">
-                                <group>
-                                    <group>
-                                        <field name="documento_revisar_comprobante_pago" readonly="1"/>
-                                        <hr/>
-                                        <field name="aprobado_comprobante_pago" string="¿Aprobar comprobante de pago presentado?"/>
-
-                                         <field name="razon_no_comprobante" string="Negación del comprobante" attrs="{'invisible':[('aprobado_comprobante_pago', '!=', False)]}"/>
-                                    </group>
-                                </group>
-                                <group>
-                                </group>
-                            </page>
-                        </notebook>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <!--VISTAS SECRETARIA TREE-->
-        <!--Vista Tree Prerrequisito Secretaria-->
-        <record id="view_tree_prerrequisito_secretaria" model="ir.ui.view">
-            <field name="name">view.tree.ma.prerrequisito.secretaria</field>
-            <field name="model">ma.prerrequisito</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="user_id"/>
-                </tree>
-            </field>
-        </record>
 
 
         <!--act_window-->
@@ -616,7 +452,7 @@
             </field>
         </record>
 
-        <!--Accion de ventana Form CIclo-->
+        <!--Accion de ventana Form Ciclo-->
         <record id="action_view_ciclo_form" model="ir.actions.act_window.view">
             <field name="sequence" eval="3"/>
             <field name="view_mode">form</field>
@@ -624,7 +460,7 @@
             <field name="act_window_id" ref="action_view_ciclo"/>
         </record>
 
-        <!--Accion de ventana Form Tree-->
+        <!--Accion de ventana Tree Ciclo-->
         <record id="action_view_ciclo_tree" model="ir.actions.act_window.view">
             <field name="sequence" eval="2"/>
             <field name="view_mode">tree</field>
@@ -676,7 +512,7 @@
             </field>
         </record>
 
-        <!--Accion de ventana Form Paralelo-->
+        <!--Accion de ventana Form Horario-->
         <record id="action_view_horario_form" model="ir.actions.act_window.view">
             <field name="sequence" eval="2"/>
             <field name="view_mode">form</field>
@@ -684,7 +520,7 @@
             <field name="act_window_id" ref="action_view_horario"/>
         </record>
 
-        <!--Accion de ventana Tree Paralelo-->
+        <!--Accion de ventana Tree Horario-->
         <record id="action_view_horario_tree" model="ir.actions.act_window.view">
             <field name="sequence" eval="1"/>
             <field name="view_mode">tree</field>
@@ -720,124 +556,10 @@
             </field>
         </record>
 
-
-        <!--Accion de ventana Prerrequisito Alumno-->
-        <record id="action_view_prerrequisito_alumno" model="ir.actions.act_window">
-            <field name="name">Prerrequisito</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">ma.prerrequisito</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[('user_id','=', uid)]</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    Crear un Prerrequisito en el módulo de Matriculas
-                </p>
-            </field>
-        </record>
-
-        <!--Accion de ventana Form Prerrequisito-->
-        <record id="action_view_prerrequisito_form" model="ir.actions.act_window.view">
-            <field name="sequence" eval="2"/>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="modulo_matriculas.view_form_prerrequisito"/>
-            <field name="act_window_id" ref="action_view_prerrequisito_alumno"/>
-        </record>
-
-        <!--Accion de ventana Tree Prerrequisito-->
-        <record id="action_view_prerrequisito_tree" model="ir.actions.act_window.view">
-            <field name="sequence" eval="1"/>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="modulo_matriculas.view_tree_prerrequisito"/>
-            <field name="act_window_id" ref="action_view_prerrequisito_alumno"/>
-        </record>
-
-        <!--Accion de ventana Prerrequisito Decano-->
-        <record id="action_view_prerrequisito_decano" model="ir.actions.act_window">
-            <field name="name">Matriculación</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">ma.prerrequisito</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[('aprobado_solicitud_decano','=',False)]</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    No existen Procesos Matriculas
-                </p>
-            </field>
-        </record>
-
-        <!--Accion de ventana Form Prerrequisito Decano-->
-        <record id="action_view_prerrequisito_form_decano" model="ir.actions.act_window.view">
-            <field name="sequence" eval="2"/>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="modulo_matriculas.view_form_prerrequisito_decano"/>
-            <field name="act_window_id" ref="action_view_prerrequisito_decano"/>
-        </record>
-
-        <!--Accion de ventana Tree Prerrequisito Decano-->
-        <record id="action_view_prerrequisito_tree_decano" model="ir.actions.act_window.view">
-            <field name="sequence" eval="1"/>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="modulo_matriculas.view_tree_prerrequisito_decano"/>
-            <field name="act_window_id" ref="action_view_prerrequisito_decano"/>
-        </record>
-
-        <!--Accion de ventana Prerrequisito Secretaria-->
-        <record id="action_view_prerrequisito_secretaria" model="ir.actions.act_window">
-            <field name="name">Matriculación</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">ma.prerrequisito</field>
-            <field name="view_mode">tree,form</field>
-            <field name="domain">[('aprobado_solicitud_decano','=',True),('aprobado_comprobante_pago','=',False)]</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    No existen Procesos Matriculas.
-                </p>
-            </field>
-        </record>
-
-        <!--Accion de ventana Form Prerrequisito Secretaria-->
-        <record id="action_view_prerrequisito_form_secretaria" model="ir.actions.act_window.view">
-            <field name="sequence" eval="2"/>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="modulo_matriculas.view_form_prerrequisito_secretaria"/>
-            <field name="act_window_id" ref="action_view_prerrequisito_secretaria"/>
-        </record>
-
-        <!--Accion de ventana Tree Prerrequisito Secretaria-->
-        <record id="action_view_prerrequisito_tree_secretaria" model="ir.actions.act_window.view">
-            <field name="sequence" eval="1"/>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="modulo_matriculas.view_tree_prerrequisito_secretaria"/>
-            <field name="act_window_id" ref="action_view_prerrequisito_secretaria"/>
-        </record>
-
-        <!--Accion de ventana Prerrequisito Gestor-->
-        <record id="action_view_prerrequisito_gestor" model="ir.actions.act_window">
-            <field name="name">Matriculación</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">ma.prerrequisito</field>
-            <field name="view_mode">tree</field>
-            <field name="domain">[('aprobado_comprobante_pago','=',True)]</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    No existen Procesos Matriculas
-                </p>
-            </field>
-        </record>
-
-        <!--Accion de ventana Tree Prerrequisito Gestor-->
-        <record id="action_view_prerrequisito_tree_gestor" model="ir.actions.act_window.view">
-            <field name="sequence" eval="1"/>
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="modulo_matriculas.view_tree_prerrequisito_gestor"/>
-            <field name="act_window_id" ref="action_view_prerrequisito_gestor"/>
-        </record>
-
         <!--Accion de ventana Tree Asignatura-->
         <record id="action_view_matricula_tree" model="ir.actions.act_window.view">
             <field name="sequence" eval="1"/>
             <field name="view_mode">tree</field>
-            <field name="view_id" ref="modulo_matriculas.view_tree_matricula_alumno"/>
             <field name="act_window_id" ref="action_view_matricula_alumno"/>
         </record>
 
@@ -849,7 +571,7 @@
             <field name="view_mode">form</field>
         </record>
 
-        <!--Accion de ventana asignatura tree-->
+        <!--Accion de ventana Asignatura tree-->
         <record id="action_view_periodo_matricula_tree" model="ir.actions.act_window.view">
             <field name="sequence" eval="1"/>
             <field name="view_mode">tree</field>
@@ -857,7 +579,7 @@
             <field name="act_window_id" ref="action_view_periodo_matricula"/>
         </record>
 
-        <!--Accion de ventana periodo matriculaf orm-->
+        <!--Accion de ventana Periodo Matricula form-->
         <record id="action_view_periodo_matricula_form" model="ir.actions.act_window.view">
             <field name="sequence" eval="2"/>
             <field name="view_mode">form</field>
@@ -895,28 +617,12 @@
         <menuitem id="menu_main_matricula_app_Alumno"
                    name="Matrículas"
                    groups = "modulo_matriculas.res_groups_alumnos"
-                   action="modulo_matriculas.action_view_prerrequisito_alumno"/>
-
-        <menuitem id="menu_main_matricula_app_Secretaria"
-                   name="Matrículas"
-                   groups = "modulo_matriculas.res_groups_secretaria"
-                   action="modulo_matriculas.action_view_prerrequisito_secretaria"/>
-
-        <menuitem id="menu_main_matricula_app_Decano"
-                   name="Matrículas"
-                   groups = "modulo_matriculas.res_groups_decano"
-                   action="modulo_matriculas.action_view_prerrequisito_decano"/>
+                   action="modulo_matriculas.action_view_matricula_alumno"/>
 
         <menuitem id="menu_datos_datos_carrera"
                   name="Datos Carrera"
                   groups = "modulo_matriculas.res_groups_administrador"
                   parent="modulo_matriculas.menu_main_matricula_app_A"/>
-
-        <menuitem id="menu_usuarios"
-                  name="Usuarios"
-                  groups = "modulo_matriculas.res_groups_administrador"
-                  parent="modulo_matriculas.menu_main_matricula_app_A"
-                  action="modulo_matriculas.action_view_usuario"/>
 
         <menuitem id="menu_main_carrera"
                   name="Carreras"
@@ -952,98 +658,5 @@
                   groups = "modulo_matriculas.res_groups_administrador"
                   parent="modulo_matriculas.menu_datos_periodo_matricula"
                   action="modulo_matriculas.action_view_periodo_matricula"/>
-
-        <menuitem id="menu_datos_procesos_gestor"
-                  name="Procesos"
-                  groups = "modulo_matriculas.res_groups_administrador"
-                  parent="modulo_matriculas.menu_main_matricula_app_A"/>
-
-        <menuitem id="menu_main_proceso_matriculacion"
-                  name="Procesos Matriculación"
-                  groups = "modulo_matriculas.res_groups_administrador"
-                  parent="modulo_matriculas.menu_datos_procesos_gestor"
-                  action="modulo_matriculas.action_view_prerrequisito_gestor"/>
-
-        <menuitem id="menu_datos_periodo_matricula_alumnos"
-                  name="Solicitudes"
-                  sequence = "1"
-                  groups ="modulo_matriculas.res_groups_alumnos"
-                  parent="modulo_matriculas.menu_main_matricula_app_Alumno"/>
-
-
-        <menuitem id="menu_main_periodo_alumnos"
-                  name="Generar Solicitud"
-                  groups ="modulo_matriculas.res_groups_alumnos"
-                  parent="modulo_matriculas.menu_datos_periodo_matricula_alumnos"
-                  action="modulo_matriculas.action_view_periodo_matricula_alumno"/>
-
-
-        <menuitem id="menu_solicitudes_alumnos"
-                  name="Matrícular"
-                  groups ="modulo_matriculas.res_groups_alumnos"
-                  parent="modulo_matriculas.menu_main_matricula_app_Alumno"/>
-
-        <menuitem id="menu_matriculas_alumnos"
-                  name="Generar Matrícula"
-                  sequence = "2"
-                  groups ="modulo_matriculas.res_groups_alumnos"
-                  parent="modulo_matriculas.menu_solicitudes_alumnos"
-                  action="modulo_matriculas.action_view_matricula_alumno"/>
-
-
-        <menuitem id="menu_procesomatricula_alumnos"
-                  name="Procesos"
-                  groups ="modulo_matriculas.res_groups_alumnos"
-                  parent="modulo_matriculas.menu_main_matricula_app_Alumno"/>
-
-        <menuitem id="menu_estadomatriculas_alumnos"
-                  name="Estado de Matrículas"
-                  sequence = "2"
-                  groups ="modulo_matriculas.res_groups_alumnos"
-                  parent="modulo_matriculas.menu_procesomatricula_alumnos"
-                  action="modulo_matriculas.action_view_prerrequisito_alumno"/>
-
-        <!--Menu para decano-->
-
-        <menuitem id="menu_proceso_decano"
-                  name="Procesos"
-                  groups ="modulo_matriculas.res_groups_decano"
-                  parent="modulo_matriculas.menu_main_matricula_app_Decano"/>
-
-        <menuitem id="menu_proceso_matricula_decano"
-                  name="Procesos Matriculación"
-                  sequence = "1"
-                  groups ="modulo_matriculas.res_groups_decano"
-                  parent="modulo_matriculas.menu_proceso_decano"
-                  action="modulo_matriculas.action_view_prerrequisito_decano"/>
-
-        <!--Menu para secretaria-->
-
-        <menuitem id="menu_proceso_secretaria"
-                  name="Procesos"
-                  groups ="modulo_matriculas.res_groups_secretaria"
-                  parent="modulo_matriculas.menu_main_matricula_app_Secretaria"/>
-
-        <menuitem id="menu_proceso_matricula_secretaria"
-                  name="Procesos Matriculación"
-                  sequence = "1"
-                  groups ="modulo_matriculas.res_groups_secretaria"
-                  parent="modulo_matriculas.menu_proceso_secretaria"
-                  action="modulo_matriculas.action_view_prerrequisito_secretaria"/>
-
-        <record model="ir.ui.view" id="confirm_wizard_formI">
-            <field name="name">wizard.validarmatricula</field>
-            <field name="model">ma.confirmar_matricula</field>
-            <field name="type">form</field>
-            <field name="arch" type="xml">
-                <form string="Validar Matrícula">
-                    <field name="yes_no" readonly="1"/>
-                    <footer>
-                        <button string="Si" class="oe_highlight" type="object" name="yes"/>
-                        <button string="No" class="oe_link" special="cancel"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
     </data>
 </odoo>

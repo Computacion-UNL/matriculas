@@ -32,49 +32,7 @@
         <field name="perm_read" eval="1"/>
     </record>
 
-    <!--Accesos para el modelo Ciclo Alumnnio-->
-    <record id="model_access_administrador_prerrequisito_alumno" model="ir.model.access">
-        <field name="name">model.access.ma.prerrequisito.alumno</field>
-        <field name="model_id" ref="modulo_matriculas.model_ma_prerrequisito"/>
-        <field name="group_id" ref="modulo_matriculas.res_groups_alumnos"/><!--Administracion/Ajustes-->
-        <field name="perm_create" eval="1"/>
-        <field name="perm_write" eval="1"/>
-        <field name="perm_unlink" eval="1"/>
-        <field name="perm_read" eval="1"/>
-    </record>
 
-    <!--Accesos para el modelo Ciclo Decano-->
-    <record id="model_access_administrador_prerrequisito_decano" model="ir.model.access">
-        <field name="name">model.access.ma.prerrequisito.decano</field>
-        <field name="model_id" ref="modulo_matriculas.model_ma_prerrequisito"/>
-        <field name="group_id" ref="modulo_matriculas.res_groups_decano"/><!--Administracion/Ajustes-->
-        <field name="perm_create" eval="0"/>
-        <field name="perm_write" eval="1"/>
-        <field name="perm_unlink" eval="0"/>
-        <field name="perm_read" eval="1"/>
-    </record>
-
-    <!--Accesos para el modelo Ciclo Secretaria-->
-    <record id="model_access_administrador_prerrequisito_secretaria" model="ir.model.access">
-        <field name="name">model.access.ma.prerrequisito.secretaria</field>
-        <field name="model_id" ref="modulo_matriculas.model_ma_prerrequisito"/>
-        <field name="group_id" ref="modulo_matriculas.res_groups_secretaria"/><!--Administracion/Ajustes-->
-        <field name="perm_create" eval="1"/>
-        <field name="perm_write" eval="1"/>
-        <field name="perm_unlink" eval="0"/>
-        <field name="perm_read" eval="1"/>
-    </record>
-
-    <!--Accesos para el modelo Ciclo Gestor-->
-    <record id="model_access_administrador_prerrequisito_gestor" model="ir.model.access">
-        <field name="name">model.access.ma.prerrequisito.gestor</field>
-        <field name="model_id" ref="modulo_matriculas.model_ma_prerrequisito"/>
-        <field name="group_id" ref="modulo_matriculas.res_groups_administrador"/><!--Administracion/Ajustes-->
-        <field name="perm_create" eval="0"/>
-        <field name="perm_write" eval="1"/>
-        <field name="perm_unlink" eval="1"/>
-        <field name="perm_read" eval="1"/>
-    </record>
 
     <!--Accesos para el modelo Asignatura Admin -->
     <record id="model_access_administrador_asignatura" model="ir.model.access">
@@ -165,27 +123,7 @@
         <field name="perm_read" eval="1"/>
     </record>
 
-    <!--Accesos para el modelo Carrera Decano-->
-    <record id="model_access_administrador_carrera_decano" model="ir.model.access">
-        <field name="name">model.access.ma.carrera.decano</field>
-        <field name="model_id" ref="modulo_matriculas.model_ma_carrera"/>
-        <field name="group_id" ref="modulo_matriculas.res_groups_decano"/><!--Administracion/Ajustes-->
-        <field name="perm_create" eval="0"/>
-        <field name="perm_write" eval="0"/>
-        <field name="perm_unlink" eval="0"/>
-        <field name="perm_read" eval="1"/>
-    </record>
 
-    <!--Accesos para el modelo Carrera Secretaria-->
-    <record id="model_access_administrador_carrera_secretaria" model="ir.model.access">
-        <field name="name">model.access.ma.carrera.secretaria</field>
-        <field name="model_id" ref="modulo_matriculas.model_ma_carrera"/>
-        <field name="group_id" ref="modulo_matriculas.res_groups_secretaria"/><!--Administracion/Ajustes-->
-        <field name="perm_create" eval="0"/>
-        <field name="perm_write" eval="0"/>
-        <field name="perm_unlink" eval="0"/>
-        <field name="perm_read" eval="1"/>
-    </record>
 
     <!--Accesos para el periodo matricula admin-->
     <record id="model_access_administrador_periodomatricula" model="ir.model.access">
@@ -198,16 +136,6 @@
         <field name="perm_read" eval="1"/>
     </record>
 
-    <!--Accesos para el periodo matricula admin-->
-    <record id="model_access_administrador_confirmar_matricula" model="ir.model.access">
-        <field name="name">model.access.ma.confirmar_matricula</field>
-        <field name="model_id" ref="modulo_matriculas.model_ma_confirmar_matricula"/>
-        <field name="group_id" ref="modulo_matriculas.res_groups_administrador"/><!--Administracion/Ajustes-->
-        <field name="perm_create" eval="1"/>
-        <field name="perm_write" eval="1"/>
-        <field name="perm_unlink" eval="1"/>
-        <field name="perm_read" eval="1"/>
-    </record>
 
     <!--Accesos para el periodo matricula administradoir-->
     <record id="model_access_administrador_matricula" model="ir.model.access">
@@ -216,7 +144,7 @@
         <field name="group_id" ref="modulo_matriculas.res_groups_administrador"/><!--Administracion/Ajustes-->
         <field name="perm_create" eval="1"/>
         <field name="perm_write" eval="1"/>
-        <field name="perm_unlink" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
         <field name="perm_read" eval="1"/>
     </record>
 
@@ -241,7 +169,6 @@
         <field name="perm_unlink" eval="0"/>
         <field name="perm_read" eval="1"/>
     </record>
-
 
 </odoo>
 
