@@ -17,6 +17,20 @@
                                 <field name ="periodo_id"/>
                                 <field name="carrera_id"/>
                             </group>
+                            <br></br>
+
+                            <group>
+                                <field name="calcular_valores"/>
+                            </group>
+                            <br></br>
+                            <group>
+                                <field name="grupo_socioeconomico_id" attrs="{'invisible': [('calcular_valores', '=', False)]}"/>
+                            </group>
+                            <br></br>
+                            <group>    
+                                <field name="costo_optimo_id" string="Régimen Académico" attrs="{'invisible': [('calcular_valores', '=', False)]}"/>
+                            </group>
+                            <br></br>
                         <hr/>
                         <notebook>
                             <page string="Datos de Tercera Matrícula">
@@ -89,6 +103,10 @@
                             <group>
                                 <field name="asignaturas_primera" readonly="1"/>
                             </group>
+                            <group>
+                                <field name="valores_pagar" readonly="1"/>
+                            </group>
+
                     </sheet>
                 </form>
             </field>
@@ -482,6 +500,34 @@
             </field>
         </record>
 
+        <!--Accion de ventana Paralelo-->
+        <record id="action_view_grupo" model="ir.actions.act_window">
+            <field name="name">Grupo Socioeconómico</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ma.grupo_socioeconomico</field>
+            <field name="view_mode">tree,form</field>
+            <!--<field name="search_view_id" ref="da_silabo.view_docente_search_valoracion"/>-->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crear Grupos socioeconómicos para calcular Valores pendientes
+                </p>
+            </field>
+        </record>
+
+        <!--Accion de ventana Paralelo-->
+        <record id="action_view_costo_optimo" model="ir.actions.act_window">
+            <field name="name">Costo Óptimo</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ma.costo_optimo</field>
+            <field name="view_mode">tree,form</field>
+            <!--<field name="search_view_id" ref="da_silabo.view_docente_search_valoracion"/>-->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Agregar régimen académico para calcular Valores pendientes
+                </p>
+            </field>
+        </record>
+
         <!--Accion de ventana Form Paralelo-->
         <record id="action_view_paralelo_form" model="ir.actions.act_window.view">
             <field name="sequence" eval="2"/>
@@ -650,6 +696,7 @@
                   parent="modulo_matriculas.menu_datos_datos_carrera"
                   action="modulo_matriculas.action_view_paralelo"/>
 
+
         <menuitem id="menu_datos_periodo_matricula"
                   name="Periodo Matrículas"
                   groups = "modulo_matriculas.res_groups_administrador"
@@ -660,5 +707,17 @@
                   groups = "modulo_matriculas.res_groups_administrador"
                   parent="modulo_matriculas.menu_datos_periodo_matricula"
                   action="modulo_matriculas.action_view_periodo_matricula"/>
+
+        <menuitem id="menu_main_grupos"
+                  name="Grupo Socioeconómico"
+                  groups = "modulo_matriculas.res_groups_administrador"
+                  parent="modulo_matriculas.menu_datos_periodo_matricula"
+                  action="modulo_matriculas.action_view_grupo"/>
+
+        <menuitem id="menu_main_costo"
+                  name="Régimen Acedémico"
+                  groups = "modulo_matriculas.res_groups_administrador"
+                  parent="modulo_matriculas.menu_datos_periodo_matricula"
+                  action="modulo_matriculas.action_view_costo_optimo"/>
     </data>
 </odoo>
