@@ -1,4 +1,4 @@
-<h1 align="center">MÓDULO PARA LA ASIGNACIÓN DE MATRÍCULA POR ASIGNATURA EN LA CARRERA DE INGENIERÍA EN SISTEMAS/COMPUTACIÓN</h1>
+<h1 align="center">MÓDULO PARA LA SIMULACIÓN DE MATRÍCULA POR ASIGNATURA EN LA CARRERA DE INGENIERÍA EN SISTEMAS/COMPUTACIÓN</h1>
 <p align="center">UNIVERSIDAD NACIONAL DE LOJA</p>
 <p align="center"><img src="https://pbs.twimg.com/profile_images/1225522326487347211/FaNm0ISf_400x400.jpg" width="200" height="200"/></p>
 
@@ -20,16 +20,17 @@ Con la dirección del:
 
 
 ## Descripción y contexto
-<p align="justify">El presente repositorio contiene la documentación y código fuente del proyecto de titulación denominado **MÓDULO PARA LA ASIGNACIÓN DE MATRÍCULA POR ASIGNATURA EN LA CARRERA DE INGENIERÍA EN SISTEMAS/COMPUTACIÓN** es una
+<p align="justify">El presente repositorio contiene la documentación y código fuente del proyecto de titulación denominado **MÓDULO PARA LA SIMULACIÓN DE MATRÍCULA POR ASIGNATURA EN LA CARRERA DE INGENIERÍA EN SISTEMAS/COMPUTACIÓN** es una
 el cual es una propuesta de automatizar el proceso del mismo nombre utilizando la plataforma Odoo Community, y tiene como objetivo brindar a los involucrados una herramienta que les permita realizar las tareas que lo componen de manera rápida, ágil e intuitiva.</p>
 
 Las funcionalidades con las que cuenta el módulo de sofware son:
 * Gestión de Ciclos
 * Gestión de Asignaturas
 * Gestión de Paralelos
-* Gestión de Usuarios
 * Gestión de Roles y Permisos
-* Comunicación y/o notificación de fases en las que se encuetra el trámite
+* Cálculo del ciclo al que puede solicitar matrícula el estudiante.
+* Cálculo de asignaturas a las que puede solicitar matrícula el estudiante.
+* Cálculo aproximado de valores a pagar por pérdida de gratuidad.
 
 ## Guía de Usuario
 <p align="justify">Para ingresar al módulo de software solicitar la dirección url al correo: direccion.cis@unl.edu.ec o su vez al autor.
