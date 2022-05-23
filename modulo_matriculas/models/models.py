@@ -107,12 +107,16 @@ class Matricula(models.Model):
 
     matricular_mismo_ciclo = fields.Boolean(string="Matricular solo en esta asignaturas", default=False)
 
+    ocultar_resultados = fields.Boolean(string="Ocultar Resultados", default=False)
+
+
     def eliminar_matriculas_diarias(self):
         matriculas = self.env["ma.matricula"].search([])
         for i in matriculas:
             i.unlink()
 
     def botonmatricular(self):
+        self.ocultar_resultados = True
         carrera_id_ma = self.carrera_id.id
         asig_tercera_aux = []
         total_creditos_tercera = 0
@@ -217,7 +221,7 @@ class Matricula(models.Model):
             print("111111111111111111111111111111111")
             print(self.verificar_horario(ciclo.id, asig_segunda_aux[i][4]))
             print(len(contC))
-            if len(contC) > 2:
+            if len(contC) > 1:
                 print(asig_segunda_aux_ordenada[i][2])
                 print("Entra")
                 if not(asig_segunda_aux[i][3] in auxiliar):
@@ -230,6 +234,7 @@ class Matricula(models.Model):
             print(aux_metodo)
         aux_metodo = aux_metodo.replace(",,", ",")
         aux_seperar = aux_metodo.split(',')
+
         print("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
         print(aux_metodo)
         for a in aux_seperar:
@@ -737,8 +742,13 @@ class Matricula(models.Model):
             aux_reporte_horario = aux_reporte_horario.replace(",,", ",")
             aux_list_horario = aux_reporte_horario.split(",")
             aux_list_horario1 = set(aux_list_horario)
-            self.materias_horario_choque = aux_list_horario1
 
+        texto_sin_comas = aux_metodo.replace(",,", ",")
+        mensaje = texto_sin_comas.replace(",,", " ")
+        mensaje = mensaje[1:]
+        mensaje = mensaje[:-1]
+        self.env.user.notify_info(message=mensaje)
+        self.materias_horario_choque = mensaje
 
         valor = ""
         if self.calcular_valores:
