@@ -746,8 +746,37 @@ class Matricula(models.Model):
         mensaje = texto_sin_comas.replace(",,", " ")
         mensaje = mensaje[1:]
         mensaje = mensaje[:-1]
-        self.env.user.notify_info(message=mensaje)
-        self.materias_horario_choque = mensaje
+        repetido = mensaje.split(sep=',')
+        repetido1 = self.asignaturas_primera.split(sep=',')
+        repetido2 = self.asignaturas_segunda.split(sep=',')
+        repetido3 = self.asignaturas_tercera.split(sep=',')
+        print("aqui repetidos")
+        print(repetido)
+        no_repetido=[]
+        for element in repetido:
+            if element not in no_repetido:
+                no_repetido.append(element)
+
+        for element in repetido1:
+            if element in no_repetido:
+                no_repetido.remove(element)
+
+        for element in repetido2:
+            if element in no_repetido:
+                no_repetido.remove(element)
+
+        for element in repetido3:
+            if element in no_repetido:
+                no_repetido.remove(element)
+
+        aux_quitar=""
+        for element in no_repetido:
+            aux_quitar = aux_quitar + "," + element + ","
+            aux_quitar = aux_quitar[1:]
+            aux_quitar = aux_quitar[:-1]
+
+        self.env.user.notify_info(message=aux_quitar)
+        self.materias_horario_choque = aux_quitar
 
         valor = ""
         if self.calcular_valores:
